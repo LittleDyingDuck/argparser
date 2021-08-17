@@ -12,7 +12,8 @@ class parser:
         self.flags = []
         self.arguments = []
         self.delimiters = []
-    # :sigh:
+
+
     @staticmethod
     def help_command(help_text): # -h, --help, etc..
         for i in sys.argv:
@@ -54,14 +55,14 @@ class parser:
         return False
 
     def add_argument(self, arg):
-        self.delimiters.append(arg)
+        self.arguments.append(arg)
 
     def _get_delim_arg_by_idx(self, idx):
         return sys.argv[idx + 1]
 
     def get_argument(self, arg):
-        #if arg not in self.arguments:
-            #raise Exception("Argument not found.")
+        if arg not in self.arguments:
+            raise Exception("Argument not found.")
         r = ""
         c = 0
         for i in sys.argv:
@@ -70,7 +71,6 @@ class parser:
                 r = sys.argv[c] # This makes no fucking sense to me but apparently it works so.
                 return r
         return None
-
 
 
     def get_flags(self):
